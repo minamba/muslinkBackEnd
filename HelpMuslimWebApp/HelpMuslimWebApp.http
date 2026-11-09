@@ -1,0 +1,6 @@
+@HelpMuslimWebApp_HostAddress = http://localhost:5161
+
+GET {{HelpMuslimWebApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

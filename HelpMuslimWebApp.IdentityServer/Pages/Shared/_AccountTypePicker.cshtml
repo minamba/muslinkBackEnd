@@ -1,0 +1,27 @@
+@using HelpMuslimWebApp.Domain.Security
+@model AccountType?
+<fieldset class="account-type">
+    <legend>Je suis</legend>
+    <label class="account-type__option">
+        <input type="radio" name="Input.AccountType" value="@AccountType.Candidat" checked="@(Model == AccountType.Candidat)" />
+        <span class="account-type__card">
+            <span class="account-type__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" /><path d="m20 20-4.35-4.35" /><path d="M8.5 13a3 3 0 0 1 5 0" /><circle cx="11" cy="9.5" r="1.5" /></svg>
+            </span>
+            <strong>Candidat</strong>
+            <small>Je cherche un emploi, un stage ou une mission bénévole</small>
+            <span class="account-type__check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 12 4 4 8-8" /></svg></span>
+        </span>
+    </label>
+    <label class="account-type__option">
+        <input type="radio" name="Input.AccountType" value="@AccountType.Recruteur" checked="@(Model == AccountType.Recruteur)" />
+        <span class="account-type__card">
+            <span class="account-type__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2.5" /><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7" /><path d="M3 12.5h18" /></svg>
+            </span>
+            <strong>Recruteur</strong>
+            <small>Je publie des offres pour mon entreprise ou association</small>
+            <span class="account-type__check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 12 4 4 8-8" /></svg></span>
+        </span>
+    </label>
+</fieldset>

@@ -1,0 +1,16 @@
+@page
+@using Microsoft.AspNetCore
+@{
+    ViewData["Title"] = "Erreur";
+    var response = HttpContext.GetOpenIddictServerResponse();
+}
+<h1>Une erreur est survenue</h1>
+@if (response != null)
+{
+    <p class="subtitle">@response.ErrorDescription</p>
+    <p class="muted">Code : @response.Error</p>
+}
+else
+{
+    <p class="subtitle">Impossible de traiter votre demande. Veuillez réessayer.</p>
+}

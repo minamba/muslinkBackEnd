@@ -1,0 +1,34 @@
+@page
+@model HelpMuslimWebApp.IdentityServer.Pages.Account.ConfirmEmailModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@{
+    ViewData["Title"] = Model.Confirmed ? "Adresse confirmée" : "Lien invalide";
+}
+<header class="card__header">
+    <span class="card__badge" aria-hidden="true">
+        @if (Model.Confirmed)
+        {
+            <svg viewBox="0 0 24 24"><path d="M5 12.5 10 17l9-10" /></svg>
+        }
+        else
+        {
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 8v5M12 16.5v.5" /></svg>
+        }
+    </span>
+    <div>
+        @if (Model.Confirmed)
+        {
+            <h1>Adresse email confirmée</h1>
+            <p class="subtitle">Merci ! <strong>@Model.Email</strong> est bien confirmée.</p>
+        }
+        else
+        {
+            <h1>Lien invalide ou expiré</h1>
+            <p class="subtitle">Ce lien de confirmation ne fonctionne plus. Depuis « Mon compte » sur Muslink, vous pouvez en demander un nouveau.</p>
+        }
+    </div>
+</header>
+<a class="btn btn--primary btn--cta" href="@Configuration["FrontUrl"]">
+    Retour sur Muslink
+    <svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+</a>

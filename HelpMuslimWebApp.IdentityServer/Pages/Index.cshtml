@@ -1,0 +1,6 @@
+@page
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@{
+    // Pas de page d'accueil sur le serveur d'identité : retour vers le site
+    Response.Redirect(Configuration["FrontUrl"] ?? "/");
+}

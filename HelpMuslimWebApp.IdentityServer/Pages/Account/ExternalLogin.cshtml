@@ -1,0 +1,32 @@
+@page
+@model HelpMuslimWebApp.IdentityServer.Pages.Account.ExternalLoginModel
+@{
+    ViewData["Title"] = "Finaliser l'inscription";
+}
+<h1>Finaliser l'inscription</h1>
+<p class="subtitle">
+    Vous êtes connecté avec <strong>@Model.ProviderDisplayName</strong> (@Model.Input.Email).
+    Indiquez votre profil pour terminer.
+</p>
+
+<form method="post" asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" novalidate>
+    <div asp-validation-summary="ModelOnly" class="alert alert--error"></div>
+
+    <partial name="_AccountTypePicker" model="Model.Input.AccountType" />
+    <span asp-validation-for="Input.AccountType" class="field__error"></span>
+
+    <div class="row">
+        <label class="field">
+            <span>Prénom</span>
+            <input asp-for="Input.FirstName" autocomplete="given-name" />
+            <span asp-validation-for="Input.FirstName" class="field__error"></span>
+        </label>
+        <label class="field">
+            <span>Nom</span>
+            <input asp-for="Input.LastName" autocomplete="family-name" />
+            <span asp-validation-for="Input.LastName" class="field__error"></span>
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn--primary">Créer mon compte</button>
+</form>

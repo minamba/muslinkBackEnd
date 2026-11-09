@@ -1,0 +1,119 @@
+@page
+@using HelpMuslimWebApp.Domain.Security
+@model HelpMuslimWebApp.IdentityServer.Pages.Account.RegisterModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@{
+    ViewData["Title"] = "Créer un compte";
+}
+@if (Model.Modes.RestrictsAccess)
+{
+    <header class="card__header">
+        <span class="card__badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="3" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+        </span>
+        <div>
+            <h1>Inscriptions fermées</h1>
+            <p class="subtitle">Il n'est pas possible de créer un compte pour le moment.</p>
+        </div>
+    </header>
+    <partial name="_SiteModeNotice" model="Model.Modes" />
+    <a class="btn btn--primary btn--cta" href="@Configuration["FrontUrl"]">
+        Retour sur Muslink
+        <svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+    </a>
+    <p class="switch">
+        Administrateur ?
+        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Accès administrateur</a>
+    </p>
+    return;
+}
+<header class="card__header">
+    <span class="card__badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M15 19a6 6 0 0 0-12 0" /><circle cx="9" cy="8" r="4" /><path d="M19 8v6M16 11h6" /></svg>
+    </span>
+    <div>
+        <h1>Créer un compte</h1>
+        <p class="subtitle">Rejoignez Muslink en quelques secondes.</p>
+    </div>
+</header>
+
+<form method="post" asp-route-returnUrl="@Model.ReturnUrl" novalidate data-register-form>
+    <div asp-validation-summary="ModelOnly" class="alert alert--error"></div>
+
+    <partial name="_AccountTypePicker" model="Model.Input.AccountType" />
+    <span asp-validation-for="Input.AccountType" class="field__error"></span>
+
+    <div class="row">
+        <label class="field">
+            <span>Prénom</span>
+            <div class="input">
+                <svg class="input__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M20 20a8 8 0 0 0-16 0" /></svg>
+                <input asp-for="Input.FirstName" autocomplete="given-name" placeholder="Amina" />
+            </div>
+            <span asp-validation-for="Input.FirstName" class="field__error"></span>
+        </label>
+        <label class="field">
+            <span>Nom</span>
+            <div class="input">
+                <svg class="input__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M20 20a8 8 0 0 0-16 0" /></svg>
+                <input asp-for="Input.LastName" autocomplete="family-name" placeholder="Benali" />
+            </div>
+            <span asp-validation-for="Input.LastName" class="field__error"></span>
+        </label>
+    </div>
+
+    <label class="field">
+        <span>Email</span>
+        <div class="input">
+            <svg class="input__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="m4 7 8 6 8-6" /></svg>
+            <input asp-for="Input.Email" type="email" autocomplete="email" placeholder="vous@exemple.fr" />
+        </div>
+        <span asp-validation-for="Input.Email" class="field__error"></span>
+    </label>
+
+    <label class="field">
+        <span>Mot de passe</span>
+        <div class="input password">
+            <svg class="input__icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="3" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg>
+            <input asp-for="Input.Password" autocomplete="new-password" data-password-rules-input />
+            <partial name="_PasswordToggle" />
+        </div>
+        <span asp-validation-for="Input.Password" class="field__error"></span>
+    </label>
+
+    @* Critères du mot de passe, cochés en direct (js/register.js) *@
+    <ul class="rules" data-password-rules>
+        <li data-rule="length">8 caractères</li>
+        <li data-rule="upper">Une majuscule</li>
+        <li data-rule="lower">Une minuscule</li>
+        <li data-rule="digit">Un chiffre</li>
+        <li data-rule="special">Un caractère spécial</li>
+    </ul>
+
+    <label class="field">
+        <span>Confirmer le mot de passe</span>
+        <div class="input password">
+            <svg class="input__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.4 3 8.3 7 10 4-1.7 7-5.6 7-10V6l-7-3Z" /><path d="m9 12 2 2 4-4" /></svg>
+            <input asp-for="Input.ConfirmPassword" autocomplete="new-password" data-password-confirm />
+            <partial name="_PasswordToggle" />
+        </div>
+        <span class="field__match" data-password-match hidden>Les mots de passe correspondent</span>
+        <span asp-validation-for="Input.ConfirmPassword" class="field__error"></span>
+    </label>
+
+    <button type="submit" class="btn btn--primary btn--cta">
+        Créer mon compte
+        <svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+    </button>
+</form>
+
+<partial name="_ExternalLogins" model="(Model.ExternalLogins, Model.ReturnUrl)" />
+
+<p class="switch">
+    Déjà inscrit ?
+    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Se connecter</a>
+</p>
+
+@section Scripts {
+    <script src="~/js/register.js" asp-append-version="true" defer></script>
+}

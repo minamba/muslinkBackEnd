@@ -1,0 +1,6 @@
+@HelpMuslimWebApp.IdentityServer_HostAddress = http://localhost:5258
+
+GET {{HelpMuslimWebApp.IdentityServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

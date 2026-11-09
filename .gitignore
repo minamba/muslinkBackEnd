@@ -1,0 +1,59 @@
+# ---------- Configuration et secrets : jamais dans git ----------
+# Clés d'API, mots de passe, chaînes de connexion (tous les environnements, à tous les niveaux)
+appsettings*
+secrets.json
+.env
+.env.*
+*.pfx
+*.p12
+*.pem
+*.key
+*service-account*.json
+*credentials*.json
+
+# Profils de publication (peuvent contenir des accès au serveur)
+*.pubxml
+*.pubxml.user
+*.publishsettings
+*.azurePubxml
+
+# ---------- Données des utilisateurs : jamais dans git ----------
+# CV, photos, documents déposés, emails enregistrés en local
+App_Data/
+**/wwwroot/uploads/
+
+# Build React copié dans l'Api au moment du déploiement
+HelpMuslimWebApp/wwwroot/*
+!HelpMuslimWebApp/wwwroot/.gitkeep
+
+# ---------- Build ----------
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Pp]ublish/
+[Pp]ublish*/
+artifacts/
+TestResults/
+*.trx
+*.coverage
+coverage/
+
+# ---------- Visual Studio, Rider, VS Code ----------
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.rsuser
+*.userosscache
+*.sln.docstates
+*.slnLaunch.user
+
+# ---------- Divers ----------
+*.log
+logs/
+*.tmp
+*.bak
+Thumbs.db
+Desktop.ini
+.DS_Store

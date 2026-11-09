@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Envoi des emails (SMTP LWS) et mise en page commune, partagés par l'Api et l'IdentityServer -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.*" />
+    <!-- File d'envoi gardée en base : table de chaque contexte (Api, IdentityServer) -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.*" />
+  </ItemGroup>
+
+  <!-- Logos intégrés aux emails (pièces liées cid:) : ils s'affichent sans dépendre d'une adresse en ligne -->
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\*.png" />
+  </ItemGroup>
+
+</Project>

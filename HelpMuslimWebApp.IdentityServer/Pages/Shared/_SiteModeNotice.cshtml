@@ -1,0 +1,22 @@
+@model HelpMuslimWebApp.IdentityServer.Services.SiteModeState
+@* Bandeau « Accès privé » / « Maintenance » des pages de connexion et d'inscription *@
+<div class="notice" role="status">
+    <span class="notice__icon" aria-hidden="true">
+        @if (Model.Maintenance)
+        {
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4 2.6-2.6Z" /></svg>
+        }
+        else
+        {
+            <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="3" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /><path d="M12 14v3" /></svg>
+        }
+    </span>
+    <div>
+        <strong>@(Model.Maintenance ? "Maintenance en cours" : "Accès privé")</strong>
+        <p>
+            @(Model.Maintenance
+                ? "Muslink est temporairement en maintenance. Seuls les administrateurs peuvent se connecter pour le moment."
+                : "Muslink est pour l'instant en accès privé : les inscriptions sont fermées et seuls les administrateurs peuvent se connecter.")
+        </p>
+    </div>
+</div>

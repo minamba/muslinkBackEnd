@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Anthropic" Version="13.3.0" />
+    <PackageReference Include="AutoMapper" Version="16.*" />
+    <PackageReference Include="HtmlSanitizer" Version="9.2.1039" />
+    <PackageReference Include="MaxMind.Db" Version="5.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.*">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="OpenIddict.Validation.AspNetCore" Version="7.7.2" />
+    <PackageReference Include="OpenIddict.Validation.SystemNetHttp" Version="7.7.2" />
+    <PackageReference Include="Stripe.net" Version="53.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.2" />
+  </ItemGroup>
+
+  <!-- Les fichiers déposés sont hors de l'Api (réglage Storage:Root). Ancien emplacement wwwroot/uploads :
+       jamais publié (déplacé vers Storage:Root au démarrage). Le build React copié dans wwwroot, lui, part avec le publish -->
+  <ItemGroup>
+    <Content Update="wwwroot\uploads\**" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+
+  <!-- Pays des visiteurs (Fréquentation) : base « IP to Country Lite » de DB-IP (CC BY 4.0), lue hors ligne -->
+  <ItemGroup>
+    <None Update="GeoData\*.mmdb" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!-- Démo : instantané des données de démo livré avec l'Api (Administration › Modes › Démo › Réinitialiser) -->
+  <ItemGroup>
+    <None Update="DemoData\*.zip" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HelpMuslimWebApp.Dal\HelpMuslimWebApp.Dal.csproj" />
+    <ProjectReference Include="..\HelpMuslimWebApp.Domain\HelpMuslimWebApp.Domain.csproj" />
+    <ProjectReference Include="..\HelpMuslimWebApp.Mailing\HelpMuslimWebApp.Mailing.csproj" />
+  </ItemGroup>
+
+</Project>

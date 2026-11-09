@@ -1,0 +1,30 @@
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] — Muslink</title>
+    @* Mêmes icônes que le site (public/ du front) *@
+    <link rel="icon" href="~/favicon.ico" sizes="any" asp-append-version="true" />
+    <link rel="icon" type="image/png" sizes="192x192" href="~/img/logo192.png" asp-append-version="true" />
+    <link rel="apple-touch-icon" href="~/img/apple-touch-icon.png" asp-append-version="true" />
+    <meta name="theme-color" content="#1e0a3c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="~/js/password-toggle.js" asp-append-version="true" defer></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</head>
+<body>
+    <main class="auth-page">
+        <a class="brand" href="@Configuration["FrontUrl"]">
+            <img class="brand__img" src="~/img/logo-muslink.png" alt="Muslink" asp-append-version="true" />
+        </a>
+        <section class="card">
+            @RenderBody()
+        </section>
+        <p class="legal">© @DateTime.Now.Year Muslink</p>
+    </main>
+</body>
+</html>
